@@ -1,0 +1,182 @@
+{
+    "schema": {
+        "options": {},
+        "crud_objects": {
+            "Users": {
+                "operations": {
+                    "UsersList": {
+                        "method": "get",
+                        "call": {
+                            "path": "/api/v1/users"
+                        },
+                        "processing_options": {
+                            "output_field": null
+                        },
+                        "query_parameters": {}
+                    },
+                    "UsersResetFactors": {
+                        "method": "post",
+                        "call": {
+                            "mode": "normal",
+                            "path": "/api/v1/users/{id}/lifecycle/reset_factors"
+                        },
+                        "resource_allowance_default": "prohibited",
+                        "resource_mandatory": [
+                            "id"
+                        ]
+                    },
+                    "UsersClearSessions": {
+                        "method": "delete",
+                        "call": {
+                            "mode": "normal",
+                            "path": "/api/v1/users/{id}/sessions"
+                        },
+                        "resource_allowance_default": "prohibited",
+                        "resource_mandatory": [
+                            "id"
+                        ]
+                    }
+                },
+                "parameters": {},
+                "key": "id",
+                "resources": {
+                    "id": "string*",
+                    "status": "string*",
+                    "created": "date*",
+                    "activated": "date*",
+                    "statusChanged": "date*",
+                    "lastLogin": "date*",
+                    "lastUpdated": "date*",
+                    "passwordChanged": "date*",
+                    "type": {
+                        "id": "_:string*"
+                    },
+                    "profile": {
+                        "login": "_:string*",
+                        "firstName": "_:string*",
+                        "lastName": "_:string*",
+                        "nickName": "_:string*",
+                        "displayName": "_:string*",
+                        "email": "_:string*",
+                        "secondEmail": "_:string*",
+                        "profileUrl": "_:string*",
+                        "preferredLanguage": "_:string*",
+                        "userType": "_:string*",
+                        "organization": "_:string*",
+                        "title": "_:string*",
+                        "division": "_:string*",
+                        "department": "_:string*",
+                        "costCenter": "_:string*",
+                        "employeeNumber": "_:string*",
+                        "mobilePhone": "_:string*",
+                        "primaryPhone": "_:string*",
+                        "streetAddress": "_:string*",
+                        "city": "_:string*",
+                        "state": "_:string*",
+                        "zipCode": "_:string*",
+                        "countryCode": "_:string*"
+                    },
+                    "credentials": {
+                        "password": "_:string*",
+                        "recovery_question": {
+                        "question": "_:string*"
+                        },
+                        "provider": {
+                        "type": "_:string*",
+                        "name": "_:string*"
+                        }
+                    }
+                }
+            },
+            "Groups": {
+                "operations": {
+                    "GroupsList": {
+                        "method": "get",
+                        "call": {
+                            "path": "/api/v1/groups"
+                        },
+                        "processing_options": {
+                            "output_field": null
+                        },
+                        "query_parameters": {}
+                    }
+                },
+                "parameters": {},
+                "key": "id",
+                "resources": {
+                    "id": "string*",
+                    "created": "date*",
+                    "lastUpdated": "date*",
+                    "lastMembershipUpdated": "date*",
+                    "type": "string*",
+                    "profile": {
+                        "name": "_:string*",
+                        "description": "_:string*"
+                    }
+                }
+            },
+            "Groups_Users": {
+                "operations": {
+                    "Groups_UsersList": {
+                        "method": "get",
+                        "call": {
+                            "mode": "iteration",
+                            "table": "Users",
+                            "iterator": "id",
+                            "path": "/api/v1/groups/{iterator}/users",
+                            "base": {
+                                "group_id": "{iterator}"
+                            }
+                        },
+                        "processing_options": {
+                            "output_field": null
+                        },
+                        "maxSessionCount": 20
+                    }
+                },
+                "parameters": {},
+                "resources": {
+                    "id": "string*"
+                }
+            }
+        }
+    },
+    "rest": {
+        "config": {
+            "baseUrl": "https://{tenant_id}",
+            "get": {
+                "query_parameters": {
+                },
+                "pagination": {
+                    "mode": "skip_take",
+                    "path":[],
+                    "page_size":"{page_size}",
+                    "params":{
+                        "limit":"{take_count}",
+                        "after":"{skip_count}"
+                    }
+                }
+            },
+            "call_handling": "generic",
+            "authentication": "aeries",
+            "test_connection": {
+                "url": "/api/v1/users?limit=1&after=0"
+            },
+            "accept": "application/json",
+            "headers": {
+                "Authorization": "SSWS {client_secret}"
+            }
+        }
+        
+    },
+    "connection": {
+        "items": [
+            {
+                "name": "page_size",
+                "type": "textbox",
+                "label": "Page Size",
+                "value": "200"
+            }
+        ]
+    }
+}
