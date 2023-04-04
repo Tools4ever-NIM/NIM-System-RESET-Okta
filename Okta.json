@@ -148,13 +148,9 @@
                 "query_parameters": {
                 },
                 "pagination": {
-                    "mode": "skip_take",
+                    "mode": "link",
                     "path":[],
                     "page_size":"{page_size}",
-                    "params":{
-                        "limit":"{take_count}",
-                        "after":"{skip_count}"
-                    }
                 }
             },
             "call_handling": "generic",
