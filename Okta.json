@@ -12,7 +12,7 @@
                         "processing_options": {
                             "output_field": null
                         },
-                        "query_parameters": {}
+                        "query_parameters": {"filter": "status eq \"ACTIVE\" or status eq \"DEPROVISIONED\" or status eq \"LOCKED_OUT\" or status eq \"PASSWORD_EXPIRED\" or status eq \"PROVISIONED\" or status eq \"RECOVERY\" or status eq \"STAGED\" or status eq \"SUSPENDED\""}
                     },
                     "UsersResetFactors": {
                         "method": "post",
@@ -34,6 +34,171 @@
                         "resource_allowance_default": "prohibited",
                         "resource_mandatory": [
                             "id"
+                        ]
+                    },
+                    "UsersCreate": {
+                        "method": "post",
+                        "call": {
+                            "mode": "normal",
+                            "path": "/api/v1/users?activate=true",
+                            "post_processing": "child_tables"
+                        },
+                        "semantics": "create",
+                        "resource_allowance_default": "optional",
+                        "resource_prohibited": [
+                            "id",
+                            "status",
+                            "created",
+                            "activated",
+                            "statusChanged",
+                            "lastLogin",
+                            "lastUpdated",
+                            "passwordChanged",
+                            "type_id",
+                            "profile_profileUrl",
+                            "profile_userType",
+                            "credentials_recovery_question_question",
+                            "credentials_provider_type",
+                            "credentials_provider_name"
+                        ],
+                        "resource_mandatory": [
+                            "profile_login",
+                            "profile_lastName",
+                            "profile_firstName",
+                            "credentials_password"
+                        ],
+                        "warning_only": [
+                        ],
+                        "body": {
+                            "profile": {
+                                "lastName": "{profile_lastName}",
+                                "firstName": "{profile_firstName}",
+                                "displayName": "{profile_displayName}",
+                                "login": "{profile_login}",
+                                "email": "{profile_email}",
+                                "employeeNumber": "{profile_employeeNumber}",
+                                "userType": "{profile_userType}",
+                                "nickName": "{profile_nickName}",
+                                "secondEmail": "{profile_secondEmail}",
+                                "preferredLanguage": "{profile_preferredLanguage}",
+                                "organization": "{profile_organization}",
+                                "title": "{profile_title}",
+                                "division": "{profile_division}",
+                                "department": "{profile_department}",
+                                "costCenter": "{profile_costCenter}",
+                                "mobilePhone": "{profile_mobilePhone}",
+                                "primaryPhone": "{profile_primaryPhone}",
+                                "streetAddress": "{profile_streetAddress}",
+                                "city": "{profile_city}",
+                                "state": "{profile_state}",
+                                "zipCode": "{profile_zipCode}",
+                                "countryCode": "{profile_CountryCode}"
+                            },
+                            "credentials": {
+                                "password": {
+                                    "value": "{credentials_password}"
+                                }
+                            }
+                        }
+                    },
+                    "UsersUpdate": {
+                        "method": "post",
+                        "call": {
+                            "mode": "normal",
+                            "path": "/api/v1/users/{id}",
+                            "post_processing": "child_tables"
+                        },
+                        "semantics": "update",
+                        "resource_allowance_default": "optional",
+                        "resource_prohibited": [
+                            "status",
+                            "created",
+                            "activated",
+                            "statusChanged",
+                            "lastLogin",
+                            "lastUpdated",
+                            "passwordChanged",
+                            "type_id",
+                            "credentials_password",
+                            "credentials_recovery_question_question",
+                            "credentials_provider_type",
+                            "credentials_provider_name"
+                        ],
+                        "resource_mandatory": [
+                            "id"
+                        ],
+                        "warning_only": [
+                        ],
+                        "body": {
+                            "profile": {
+                                "lastName": "{profile_lastName}",
+                                "firstName": "{profile_firstName}",
+                                "displayName": "{profile_displayName}",
+                                "login": "{profile_login}",
+                                "email": "{profile_email}",
+                                "userType": "profile_userType}",
+                                "employeeNumber": "{profile_employeeNumber}",
+                                "nickName": "{profile_nickName}",
+                                "secondEmail": "{profile_secondEmail}",
+                                "preferredLanguage": "{profile_preferredLanguage}",
+                                "organization": "{profile_organization}",
+                                "title": "{profile_title}",
+                                "division": "{profile_division}",
+                                "department": "{profile_department}",
+                                "costCenter": "{profile_costCenter}",
+                                "mobilePhone": "{profile_mobilePhone}",
+                                "primaryPhone": "{profile_primaryPhone}",
+                                "streetAddress": "{profile_streetAddress}",
+                                "city": "{profile_city}",
+                                "state": "{profile_state}",
+                                "zipCode": "{profile_zipCode}",
+                                "countryCode": "{profile_CountryCode}"
+                            },
+                            "credentials": {
+                                "password": {
+                                    "value": "{credentials_password}"
+                                }
+                            }
+                        }
+                    },
+                    "UsersDeactivate": {
+                        "method": "post",
+                        "call": {
+                            "mode": "normal",
+                            "path": "/api/v1/users/{id}/lifecycle/deactivate"
+                        },
+                        "resource_allowance_default": "prohibited",
+                        "resource_mandatory": [
+                            "id"
+                        ],
+                        "warning_only": [
+                        ]
+                    },
+                    "UsersReactivate": {
+                        "method": "post",
+                        "call": {
+                            "mode": "normal",
+                            "path": "/api/v1/users/{id}/lifecycle/reactivate?sendEmail=false"
+                        },
+                        "resource_allowance_default": "prohibited",
+                        "resource_mandatory": [
+                            "id"
+                        ],
+                        "warning_only": [
+                        ]
+                    },
+                    "UsersDelete": {
+                        "method": "delete",
+                        "call": {
+                            "mode": "normal",
+                            "path": "/api/v1/users/{id}"
+                        },
+                        "semantics": "delete",
+                        "resource_allowance_default": "prohibited",
+                        "resource_mandatory": [
+                            "id"
+                        ],
+                        "warning_only": [
                         ]
                     }
                 },
@@ -79,11 +244,11 @@
                     "credentials": {
                         "password": "_:string*",
                         "recovery_question": {
-                        "question": "_:string*"
+                            "question": "_:string*"
                         },
                         "provider": {
-                        "type": "_:string*",
-                        "name": "_:string*"
+                            "type": "_:string*",
+                            "name": "_:string*"
                         }
                     }
                 }
@@ -150,7 +315,7 @@
                 "pagination": {
                     "mode": "link",
                     "path":[],
-                    "page_size":"{page_size}",
+                    "page_size":"{page_size}"
                 }
             },
             "call_handling": "generic",
