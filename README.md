@@ -1,9 +1,21 @@
-# NIM-System-REST-Okta
+# Okta
 
-This connector provides connectivity to Okta for provisioning
+<img src="https://github.com/Tools4ever-NIM/NIM-System-REST-Okta/assets/24281600/65a5532f-6dc7-49df-9476-3e56ab2a1fc9" width="256px" />
 
-# Setup Authentication
-https://developer.okta.com/docs/guides/create-an-api-token/-/main/#privilege-level
+
+## Data Tables
+- Groups
+- Groups_Users
+- Users
+
+
+## Actions
+- Users
+    - Create/Update/Delete
+    - Reset Factors
+    - Clear Sessions
+    - Deactivate/Reactivate
+      
 
 # NIM Docs
 The official NIM documentation can be found at: https://docs.nimsuite.com
