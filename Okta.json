@@ -323,6 +323,29 @@
             "test_connection": {
                 "url": "/api/v1/users?limit=1&after=0"
             },
+            "retry": [
+                {
+                    "type": "statusCode",
+                    "statusCode": 429,
+                    "retry": {
+                        "type": "simple",
+                        "maxCount": 12,
+                        "waitTime": 5
+                    }
+                },
+                {
+                    "type": "statusCode",
+                    "statusCode": 500,
+                    "retry": {
+                        "type": "simple",
+                        "maxCount": 12,
+                        "waitTime": 5
+                    }
+                },
+                {
+                    "type": "connectionError"
+                }
+            ],
             "accept": "application/json",
             "headers": {
                 "Authorization": "SSWS {client_secret}"
