@@ -12,7 +12,9 @@
                         "processing_options": {
                             "output_field": null
                         },
-                        "query_parameters": {"filter": "status eq \"ACTIVE\" or status eq \"DEPROVISIONED\" or status eq \"LOCKED_OUT\" or status eq \"PASSWORD_EXPIRED\" or status eq \"PROVISIONED\" or status eq \"RECOVERY\" or status eq \"STAGED\" or status eq \"SUSPENDED\""}
+                        "query_parameters": {
+                            "filter": "status eq \"ACTIVE\" or status eq \"DEPROVISIONED\" or status eq \"LOCKED_OUT\" or status eq \"PASSWORD_EXPIRED\" or status eq \"PROVISIONED\" or status eq \"RECOVERY\" or status eq \"STAGED\" or status eq \"SUSPENDED\""
+                        }
                     },
                     "UsersResetFactors": {
                         "method": "post",
@@ -67,8 +69,7 @@
                             "profile_firstName",
                             "credentials_password"
                         ],
-                        "warning_only": [
-                        ],
+                        "warning_only": [],
                         "body": {
                             "profile": {
                                 "lastName": "{profile_lastName}",
@@ -127,8 +128,7 @@
                         "resource_mandatory": [
                             "id"
                         ],
-                        "warning_only": [
-                        ],
+                        "warning_only": [],
                         "body": {
                             "profile": {
                                 "lastName": "{profile_lastName}",
@@ -171,8 +171,7 @@
                         "resource_mandatory": [
                             "id"
                         ],
-                        "warning_only": [
-                        ]
+                        "warning_only": []
                     },
                     "UsersReactivate": {
                         "method": "post",
@@ -184,8 +183,7 @@
                         "resource_mandatory": [
                             "id"
                         ],
-                        "warning_only": [
-                        ]
+                        "warning_only": []
                     },
                     "UsersDelete": {
                         "method": "delete",
@@ -198,8 +196,7 @@
                         "resource_mandatory": [
                             "id"
                         ],
-                        "warning_only": [
-                        ]
+                        "warning_only": []
                     }
                 },
                 "parameters": {},
@@ -280,13 +277,42 @@
                     }
                 }
             },
+            "Okta_Groups": {
+                "operations": {
+                    "GroupsList": {
+                        "method": "get",
+                        "call": {
+                            "path": "/api/v1/groups"
+                        },
+                        "processing_options": {
+                            "output_field": null
+                        },
+                        "query_parameters": {
+                            "filter": "type eq \"OKTA_GROUP\""
+                        }
+                    }
+                },
+                "parameters": {},
+                "key": "id",
+                "resources": {
+                    "id": "string*",
+                    "created": "date*",
+                    "lastUpdated": "date*",
+                    "lastMembershipUpdated": "date*",
+                    "type": "string*",
+                    "profile": {
+                        "name": "_:string*",
+                        "description": "_:string*"
+                    }
+                }
+            },
             "Groups_Users": {
                 "operations": {
                     "Groups_UsersList": {
                         "method": "get",
                         "call": {
                             "mode": "iteration",
-                            "table": "Users",
+                            "table": "Groups",
                             "iterator": "id",
                             "path": "/api/v1/groups/{iterator}/users",
                             "base": {
@@ -296,13 +322,38 @@
                         "processing_options": {
                             "output_field": null
                         },
-                        "maxSessionCount": 20
+                        "maxSessionCount": 5
                     }
                 },
                 "parameters": {},
                 "resources": {
                     "id": "string*"
+					"group_id": "string*"
                 }
+            },
+            "Okta_Groups_Users": {
+                "operations": {
+                    "Groups_UsersList": {
+                        "method": "get",
+                        "call": {
+                            "mode": "iteration",
+                            "table": "Okta_Groups",
+                            "iterator": "id",
+                            "path": "/api/v1/groups/{iterator}/users",
+                            "base": {
+                                "group_id": "{iterator}"
+                            }
+                        },
+                        "processing_options": {
+                            "output_field": null
+                        },
+                        "maxSessionCount": 5
+                    }
+                },
+                "parameters": {},
+                "resources": {
+                    "id": "string*""id": "string*"
+					"group_id": "string*"
             }
         }
     },
@@ -310,12 +361,11 @@
         "config": {
             "baseUrl": "https://{tenant_id}",
             "get": {
-                "query_parameters": {
-                },
+                "query_parameters": {},
                 "pagination": {
                     "mode": "link",
-                    "path":[],
-                    "page_size":"{page_size}"
+                    "path": [],
+                    "page_size": "{page_size}"
                 }
             },
             "call_handling": "generic",
@@ -330,7 +380,7 @@
                     "retry": {
                         "type": "simple",
                         "maxCount": 12,
-                        "waitTime": 5
+                        "waitTime": 60
                     }
                 },
                 {
@@ -339,7 +389,7 @@
                     "retry": {
                         "type": "simple",
                         "maxCount": 12,
-                        "waitTime": 5
+                        "waitTime": 60
                     }
                 },
                 {
@@ -351,7 +401,6 @@
                 "Authorization": "SSWS {client_secret}"
             }
         }
-        
     },
     "connection": {
         "items": [
