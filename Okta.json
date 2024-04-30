@@ -327,7 +327,7 @@
                 },
                 "parameters": {},
                 "resources": {
-                    "id": "string*"
+                    "id": "string*",
 					"group_id": "string*"
                 }
             },
@@ -352,7 +352,7 @@
                 },
                 "parameters": {},
                 "resources": {
-                    "id": "string*""id": "string*"
+                    "id": "string*",
 					"group_id": "string*"
             }
         }
