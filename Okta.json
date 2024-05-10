@@ -2,6 +2,163 @@
     "schema": {
         "options": {},
         "crud_objects": {
+            "Apps": {
+                "operations": {
+                    "AppsList": {
+                        "method": "get",
+                        "call": {
+                            "path": "/api/v1/apps"
+                        },
+                        "processing_options": {
+                            "output_field": null
+                        },
+                        "query_parameters": {}
+                    }
+                },
+                "parameters": {},
+                "key": "id",
+                "resources": {
+                    "id": "string*",
+                    "name": "string*",
+                    "label": "string*",
+                    "status": "string*",
+                    "lastUpdated": "string*",
+                    "created": "string*",
+                    "accessibility": {
+                        "selfService": "_:boolean*",
+                        "errorRedirectUrl": "_:boolean*",
+                        "loginRedirectUrl": "_:boolean*"
+                    },
+                    "visibility": {
+                    "autoSubmitToolbar": "_:boolean*",
+                    "hide": {
+                        "iOS": "_:boolean*",
+                        "web": "_:boolean*"
+                    },
+                    "appLinks": {
+                        "testorgone_customsaml20app_1_link": "_:boolean*"
+                    }
+                    },
+                    "features": ["string*"],
+                    "signOnMode": "string*",
+                    "credentials": {
+                        "userNameTemplate": {
+                            "template": "_:string*",
+                            "type": "_:string*"
+                        },
+                        "signing": {
+                            "kid":"_:string*"
+                        }
+                    },
+                    "settings": {
+                    "app": {
+                        "buttonField": "_:string*",
+                        "passwordField": "_:string*",
+                        "usernameField": "_:string*",
+                        "url": "_:string*"
+                    },
+                    "notifications": {
+                        "vpn": {
+                        "network": {
+                            "connection": "_:string*"
+                        },
+                        "message": "_:string*",
+                        "helpUrl": "_:string*"
+                        }
+                    },
+                    "signOn": {
+                        "defaultRelayState": "_:string*",
+                        "ssoAcsUrl": "_:string*",
+                        "idpIssuer": "_:string*",
+                        "audience": "_:string*",
+                        "recipient": "_:string*",
+                        "destination": "_:string*",
+                        "subjectNameIdTemplate": "_:string*",
+                        "subjectNameIdFormat": "_:string*",
+                        "responseSigned": "_:boolean*",
+                        "assertionSigned": "_:boolean*",
+                        "signatureAlgorithm": "_:string*",
+                        "digestAlgorithm": "_:string*",
+                        "honorForceAuthn": "_:boolean*",
+                        "authnContextClassRef": "_:string*",
+                        "slo": {
+                            "enabled": "_:boolean*",
+                            "spIssuer": "_:string*",
+                            "logoutUrl": "_:string*"
+                        },
+                        "participateSlo": {
+                            "enabled": "_:boolean*",
+                            "logoutRequestUrl": "_:string*",
+                            "sessionIndexRequired": "_:boolean*",
+                            "bindingType": "_:string*"
+                        },
+                        "spCertificate": {
+                            "x5c": [
+                            "_:string*"
+                            ]
+                        },
+                        "requestCompressed": "_:boolean*",
+                        "allowMultipleAcsEndpoints": "_:boolean*",
+                        "acsEndpoints": [{
+                            "url": "_:string*",
+                            "index":"_:string*"
+                          }],
+                        "attributeStatements": [{
+                            "type": "string*",
+                            "name": "string*",
+                            "namespace": "string*",
+                            "values": ["string*"]
+                        }],
+                        "inlineHooks": [
+                        {
+                            "id": "string*",
+                            "_links": {
+                                "self": {
+                                    "href": "_:string*",
+                                    "hints": {
+                                        "allow": ["_:string*"]
+                                    }
+                                }
+                            }
+                        }
+                        ]
+                    }
+                    },
+                    "_links": {
+                        "logo": [
+                            {
+                            "name": "string*",
+                            "href": "string*",
+                            "type": "string*"
+                            }
+                        ],
+                        "appLinks": [
+                            {
+                            "name": "string*",
+                            "href": "string*",
+                            "type": "string*"
+                            }
+                        ],
+                        "help": {
+                            "href": "_:string*",
+                            "type": "_:string*"
+                        },
+                        "users": {
+                            "href": "_:string*"
+                        },
+                        "deactivate": {
+                            "href": "_:string*"
+                        },
+                        "groups": {
+                            "href": "_:string*"
+                        },
+                        "metadata": {
+                            "href": "_:string*",
+                            "type": "_:string*"
+                        }
+                    }
+                }
+            },
             "Users": {
                 "operations": {
                     "UsersList": {
@@ -279,7 +436,7 @@
             },
             "Okta_Groups": {
                 "operations": {
-                    "GroupsList": {
+                    "Okta_GroupsList": {
                         "method": "get",
                         "call": {
                             "path": "/api/v1/groups"
@@ -290,6 +447,38 @@
                         "query_parameters": {
                             "filter": "type eq \"OKTA_GROUP\""
                         }
+                    },
+                    "Okta_GroupCreate": {
+                        "method": "post",
+                        "call": {
+                            "mode": "normal",
+                            "path": "/api/v1/groups"
+                        },
+                        "semantics": "create",
+                        "resource_allowance_default": "optional",
+                        "resource_prohibited": [
+                            "id",
+                            "created",
+                            "lastUpdated",
+                            "lastMemberbershipUpdated",
+                            "type"
+                        ],
+                        "resource_mandatory": [
+                            "profile_name",
+                            "profile_description"
+                        ]
+                    },
+                    "Okta_GroupDelete": {
+                        "method": "delete",
+                        "call": {
+                            "mode": "normal",
+                            "path": "/api/v1/groups/{id}"
+                        },
+                        "semantics": "delete",
+                        "resource_allowance_default": "prohibited",
+                        "resource_mandatory": [
+                            "id"
+                        ]
                     }
                 },
                 "parameters": {},
@@ -328,12 +517,12 @@
                 "parameters": {},
                 "resources": {
                     "id": "string*",
-					"group_id": "string*"
+                    "group_id": "string*"
                 }
             },
             "Okta_Groups_Users": {
                 "operations": {
-                    "Groups_UsersList": {
+                    "Okta_Groups_UsersList": {
                         "method": "get",
                         "call": {
                             "mode": "iteration",
@@ -348,12 +537,59 @@
                             "output_field": null
                         },
                         "maxSessionCount": 5
+                    },
+                    "Okta_Groups_UserAdd": {
+                        "method": "post",
+                        "call": {
+                            "mode": "normal",
+                            "path": "/api/v1/groups/{group_id}/users/{id}"
+                        },
+                        "query_parameters": {},
+                        "body":{
+                            "_nim_merge_attributes_": false
+                        },
+                        "semantics": "create",
+                        "resource_allowance_default": "mandatory",
+                        "resource_mandatory": [
+                            "id",
+                            "group_id"
+                        ]
+                    },
+                    "Okta_Groups_UserRemove": {
+                        "method": "delete",
+                        "call": {
+                            "mode": "normal",
+                            "path": "/api/v1/groups/{group_id}/users/{id}"
+                        },
+                        "query_parameters": {},
+                        "body":{
+                            "_nim_merge_attributes_": false
+                        },
+                        "semantics": "delete",
+                        "resource_allowance_default": "mandatory",
+                        "resource_mandatory": [
+                            "id",
+                            "group_id"
+                        ]
                     }
                 },
                 "parameters": {},
+                "groupmembership": {
+                    "add_operation": "Okta_Groups_UserAdd",
+                    "remove_operation": "Okta_Groups_UserRemove",
+                    "member_table": "Users",
+                    "group_table": "Okta_Groups",
+                    "member_attributes": {
+                        "id": "id"
+                    },
+                    "group_attributes": {
+                        "id": "group_id"
+                    }
+                },
                 "resources": {
                     "id": "string*",
-					"group_id": "string*"
+                    "group_id": "string*"
+                }
             }
         }
     },
