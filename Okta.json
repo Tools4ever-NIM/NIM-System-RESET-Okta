@@ -159,6 +159,206 @@
                     }
                 }
             },
+            "Apps_Groups": {
+                "operations": {
+                    "Apps_GroupsList": {
+                        "method": "get",
+                        "call": {
+                            "mode": "iteration",
+                            "table": "Apps",
+                            "iterator": "id",
+                            "path": "/api/v1/apps/{iterator}/groups",
+                            "base": {
+                                "app_id": "{iterator}"
+                            }
+                        },
+                        "processing_options": {
+                            "output_field": null
+                        },
+                        "maxSessionCount": 5
+                    },
+                    "Apps_GroupAdd": {
+                        "method": "put",
+                        "call": {
+                            "mode": "normal",
+                            "path": "/api/v1/apps/{app_id}/groups/{id}"
+                        },
+                        "query_parameters": {},
+                        "body":{
+                            "_nim_merge_attributes_": false
+                        },
+                        "semantics": "create",
+                        "resource_allowance_default": "mandatory",
+                        "resource_mandatory": [
+                            "id",
+                            "app_id"
+                        ]
+                    },
+                    "Apps_GroupRemove": {
+                        "method": "delete",
+                        "call": {
+                            "mode": "normal",
+                            "path": "/api/v1/groups/{app_id}/groups/{id}"
+                        },
+                        "query_parameters": {},
+                        "body":{
+                            "_nim_merge_attributes_": false
+                        },
+                        "semantics": "delete",
+                        "resource_allowance_default": "mandatory",
+                        "resource_mandatory": [
+                            "id",
+                            "app_id"
+                        ]
+                    }
+                },
+                "parameters": {},
+                "groupmembership": {
+                    "add_operation": "Apps_GroupAdd",
+                    "remove_operation": "Apps_GroupRemove",
+                    "member_table": "Groups",
+                    "group_table": "Apps",
+                    "member_attributes": {
+                        "id": "id"
+                    },
+                    "group_attributes": {
+                        "id": "app_id"
+                    }
+                },
+                "resources": {
+                    "id": "string*",
+                    "app_id": "string*",
+                    "lastUpdated": "string*",
+                    "priority": "number*"
+                }
+            },
+            "Apps_Users": {
+                "operations": {
+                    "Apps_UsersList": {
+                        "method": "get",
+                        "call": {
+                            "mode": "iteration",
+                            "table": "Apps",
+                            "iterator": "id",
+                            "path": "/api/v1/apps/{iterator}/users",
+                            "base": {
+                                "app_id": "{iterator}"
+                            }
+                        },
+                        "processing_options": {
+                            "output_field": null
+                        },
+                        "maxSessionCount": 5
+                    },
+                    "Apps_UserAdd": {
+                        "method": "put",
+                        "call": {
+                            "mode": "normal",
+                            "path": "/api/v1/apps/{app_id}/users/{id}"
+                        },
+                        "query_parameters": {},
+                        "body":{
+                            "_nim_merge_attributes_": false
+                        },
+                        "semantics": "create",
+                        "resource_allowance_default": "mandatory",
+                        "resource_mandatory": [
+                            "id",
+                            "app_id"
+                        ]
+                    },
+                    "Apps_UserRemove": {
+                        "method": "delete",
+                        "call": {
+                            "mode": "normal",
+                            "path": "/api/v1/groups/{app_id}/users/{id}"
+                        },
+                        "query_parameters": {},
+                        "body":{
+                            "_nim_merge_attributes_": false
+                        },
+                        "semantics": "delete",
+                        "resource_allowance_default": "mandatory",
+                        "resource_mandatory": [
+                            "id",
+                            "app_id"
+                        ]
+                    },
+                    "Apps_UserSetCredential": {
+                        "method": "post",
+                        "call": {
+                            "mode": "normal",
+                            "path": "/api/v1/apps/{app_id}/users/{id}"
+                        },
+                        "body":{
+                            "_nim_merge_attributes_": false,
+                            "credentials": {
+                                "userName": "{credentials.userName}",
+                                "password": {
+                                    "value": "{credentials.password.value}"
+                                }
+                            }
+                        },
+                        "resource_allowance_default": "prohibited",
+                        "resource_mandatory": [
+                            "id",
+                            "app_id",
+                            "credentials_userName",
+                            "credentials_password_value"
+                        ]
+                    }
+                },
+                "parameters": {},
+                "groupmembership": {
+                    "add_operation": "Apps_UserAdd",
+                    "remove_operation": "Apps_UserRemove",
+                    "member_table": "Users",
+                    "group_table": "Apps",
+                    "member_attributes": {
+                        "id": "id"
+                    },
+                    "group_attributes": {
+                        "id": "app_id"
+                    }
+                },
+                "resources": {
+                    "id": "string*",
+                    "app_id": "string*",
+                    "externalId": "string*",
+                    "created": "string*",
+                    "lastUpdated": "string*",
+                    "scope": "string*",
+                    "status": "string*",
+                    "statusChanged": "string*",
+                    "passwordChanged": "string*",
+                    "syncState": "string*",
+                    "lastSync": "string*",
+                    "credentials": {
+                      "userName": "_:string*",
+                      "password": {
+                        "value": "_:string*"
+                      }
+                    },
+                    "profile": {
+                      "secondEmail": "_:string*",
+                      "lastName": "_:string*",
+                      "mobilePhone": "_:string*",
+                      "email": "_:string*",
+                      "salesforceGroups": ["_:string*"],
+                      "role": "_:string*",
+                      "firstName": "_:string*",
+                      "profile": "_:string*"
+                    },
+                    "_links": {
+                      "app": {
+                        "href": "_:string*"
+                      },
+                      "user": {
+                        "href": "_:string*"
+                      }
+                    }
+                }
+            },
             "Users": {
                 "operations": {
                     "UsersList": {
@@ -591,6 +791,7 @@
                     "group_id": "string*"
                 }
             }
+            
         }
     },
     "rest": {
