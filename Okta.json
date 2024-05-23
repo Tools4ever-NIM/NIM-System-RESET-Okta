@@ -13,6 +13,60 @@
                             "output_field": null
                         },
                         "query_parameters": {}
+                    },
+                    "AppOAuthCreate": {
+                        "method": "post",
+                        "call": {
+                            "mode": "normal",
+                            "path": "/api/v1/groups"
+                        },
+                        "semantics": "create",
+                        "resource_allowance_default": "prohibited",
+                        "resource_mandatory": [
+                            "name",
+                            "label",
+                            "signonMode",
+                            "credentials_oauthClient_token_endpoint_auth_method",
+                            "settings_oauthClient_redirect_uris",
+                            "settings_oauthClient_wildcard_redirect",
+                            "settings_oauthClient_response_types",
+                            "settings_oauthClient_grant_types",
+                            "settings_oauthClient_application_type",
+                            "settings_oauthClient_idp_initiated_login_mode"
+                        ]
+                    },
+                    "AppSAMLCreate": {
+                        "method": "post",
+                        "call": {
+                            "mode": "normal",
+                            "path": "/api/v1/groups"
+                        },
+                        "semantics": "create",
+                        "resource_allowance_default": "prohibited",
+                        "resource_mandatory": [
+                            "name",
+                            "label",
+                            "signonMode",
+                            "credentials_oauthClient_token_endpoint_auth_method",
+                            "settings_oauthClient_redirect_uris",
+                            "settings_oauthClient_wildcard_redirect",
+                            "settings_oauthClient_response_types",
+                            "settings_oauthClient_grant_types",
+                            "settings_oauthClient_application_type",
+                            "settings_oauthClient_idp_initiated_login_mode"
+                        ]
+                    },
+                    "AppDelete": {
+                        "method": "delete",
+                        "call": {
+                            "mode": "normal",
+                            "path": "/api/v1/aps/{id}"
+                        },
+                        "semantics": "delete",
+                        "resource_allowance_default": "prohibited",
+                        "resource_mandatory": [
+                            "id"
+                        ]
                     }
                 },
                 "parameters": {},
@@ -51,78 +105,78 @@
                         }
                     },
                     "settings": {
-                    "app": {
-                        "buttonField": "_:string*",
-                        "passwordField": "_:string*",
-                        "usernameField": "_:string*",
-                        "url": "_:string*"
-                    },
-                    "notifications": {
-                        "vpn": {
-                        "network": {
-                            "connection": "_:string*"
+                        "app": {
+                            "buttonField": "_:string*",
+                            "passwordField": "_:string*",
+                            "usernameField": "_:string*",
+                            "url": "_:string*"
                         },
-                        "message": "_:string*",
-                        "helpUrl": "_:string*"
-                        }
-                    },
-                    "signOn": {
-                        "defaultRelayState": "_:string*",
-                        "ssoAcsUrl": "_:string*",
-                        "idpIssuer": "_:string*",
-                        "audience": "_:string*",
-                        "recipient": "_:string*",
-                        "destination": "_:string*",
-                        "subjectNameIdTemplate": "_:string*",
-                        "subjectNameIdFormat": "_:string*",
-                        "responseSigned": "_:boolean*",
-                        "assertionSigned": "_:boolean*",
-                        "signatureAlgorithm": "_:string*",
-                        "digestAlgorithm": "_:string*",
-                        "honorForceAuthn": "_:boolean*",
-                        "authnContextClassRef": "_:string*",
-                        "slo": {
-                            "enabled": "_:boolean*",
-                            "spIssuer": "_:string*",
-                            "logoutUrl": "_:string*"
+                        "notifications": {
+                            "vpn": {
+                            "network": {
+                                "connection": "_:string*"
+                            },
+                            "message": "_:string*",
+                            "helpUrl": "_:string*"
+                            }
                         },
-                        "participateSlo": {
-                            "enabled": "_:boolean*",
-                            "logoutRequestUrl": "_:string*",
-                            "sessionIndexRequired": "_:boolean*",
-                            "bindingType": "_:string*"
-                        },
-                        "spCertificate": {
-                            "x5c": [
-                            "_:string*"
-                            ]
-                        },
-                        "requestCompressed": "_:boolean*",
-                        "allowMultipleAcsEndpoints": "_:boolean*",
-                        "acsEndpoints": [{
-                            "url": "_:string*",
-                            "index":"_:string*"
-                          }],
-                        "attributeStatements": [{
-                            "type": "string*",
-                            "name": "string*",
-                            "namespace": "string*",
-                            "values": ["string*"]
-                        }],
-                        "inlineHooks": [
-                        {
-                            "id": "string*",
-                            "_links": {
-                                "self": {
-                                    "href": "_:string*",
-                                    "hints": {
-                                        "allow": ["_:string*"]
+                        "signOn": {
+                            "defaultRelayState": "_:string*",
+                            "ssoAcsUrl": "_:string*",
+                            "idpIssuer": "_:string*",
+                            "audience": "_:string*",
+                            "recipient": "_:string*",
+                            "destination": "_:string*",
+                            "subjectNameIdTemplate": "_:string*",
+                            "subjectNameIdFormat": "_:string*",
+                            "responseSigned": "_:boolean*",
+                            "assertionSigned": "_:boolean*",
+                            "signatureAlgorithm": "_:string*",
+                            "digestAlgorithm": "_:string*",
+                            "honorForceAuthn": "_:boolean*",
+                            "authnContextClassRef": "_:string*",
+                            "slo": {
+                                "enabled": "_:boolean*",
+                                "spIssuer": "_:string*",
+                                "logoutUrl": "_:string*"
+                            },
+                            "participateSlo": {
+                                "enabled": "_:boolean*",
+                                "logoutRequestUrl": "_:string*",
+                                "sessionIndexRequired": "_:boolean*",
+                                "bindingType": "_:string*"
+                            },
+                            "spCertificate": {
+                                "x5c": [
+                                "_:string*"
+                                ]
+                            },
+                            "requestCompressed": "_:boolean*",
+                            "allowMultipleAcsEndpoints": "_:boolean*",
+                            "acsEndpoints": [{
+                                "url": "_:string*",
+                                "index":"_:string*"
+                            }],
+                            "attributeStatements": [{
+                                "type": "string*",
+                                "name": "string*",
+                                "namespace": "string*",
+                                "values": ["string*"]
+                            }],
+                            "inlineHooks": [
+                            {
+                                "id": "string*",
+                                "_links": {
+                                    "self": {
+                                        "href": "_:string*",
+                                        "hints": {
+                                            "allow": ["_:string*"]
+                                        }
                                     }
                                 }
                             }
+                            ]
                         }
-                        ]
-                    }
                     },
                     "_links": {
                         "logo": [
@@ -261,7 +315,7 @@
                             "_nim_merge_attributes_": false
                         },
                         "semantics": "create",
-                        "resource_allowance_default": "mandatory",
+                        "resource_allowance_default": "prohibited",
                         "resource_mandatory": [
                             "id",
                             "app_id"
@@ -278,7 +332,7 @@
                             "_nim_merge_attributes_": false
                         },
                         "semantics": "delete",
-                        "resource_allowance_default": "mandatory",
+                        "resource_allowance_default": "prohibited",
                         "resource_mandatory": [
                             "id",
                             "app_id"
@@ -749,7 +803,7 @@
                             "_nim_merge_attributes_": false
                         },
                         "semantics": "create",
-                        "resource_allowance_default": "mandatory",
+                        "resource_allowance_default": "prohibited",
                         "resource_mandatory": [
                             "id",
                             "group_id"
@@ -766,7 +820,7 @@
                             "_nim_merge_attributes_": false
                         },
                         "semantics": "delete",
-                        "resource_allowance_default": "mandatory",
+                        "resource_allowance_default": "prohibited",
                         "resource_mandatory": [
                             "id",
                             "group_id"
