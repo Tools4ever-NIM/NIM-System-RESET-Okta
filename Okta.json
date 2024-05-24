@@ -793,7 +793,7 @@
                         "maxSessionCount": 5
                     },
                     "Okta_Groups_UserAdd": {
-                        "method": "post",
+                        "method": "put",
                         "call": {
                             "mode": "normal",
                             "path": "/api/v1/groups/{group_id}/users/{id}"
