@@ -478,6 +478,7 @@
                             "profile_login",
                             "profile_lastName",
                             "profile_firstName",
+                            "profile_email",
                             "credentials_password"
                         ],
                         "warning_only": [],
