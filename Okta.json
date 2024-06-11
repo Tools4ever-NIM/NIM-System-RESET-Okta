@@ -454,7 +454,7 @@
                         "call": {
                             "mode": "normal",
                             "path": "/api/v1/users?activate=true",
-                            "post_processing": "child_tables"
+                            "post_processing": "as_input"
                         },
                         "semantics": "create",
                         "resource_allowance_default": "optional",
@@ -519,7 +519,7 @@
                         "call": {
                             "mode": "normal",
                             "path": "/api/v1/users/{id}",
-                            "post_processing": "child_tables"
+                            "post_processing": "as_input"
                         },
                         "semantics": "update",
                         "resource_allowance_default": "optional",
