@@ -2,6 +2,417 @@
     "schema": {
         "options": {},
         "crud_objects": {
+            "Apps": {
+                "operations": {
+                    "AppsList": {
+                        "method": "get",
+                        "call": {
+                            "path": "/api/v1/apps"
+                        },
+                        "processing_options": {
+                            "output_field": null
+                        },
+                        "query_parameters": {}
+                    },
+                    "AppOAuthCreate": {
+                        "method": "post",
+                        "call": {
+                            "mode": "normal",
+                            "path": "/api/v1/groups"
+                        },
+                        "semantics": "create",
+                        "resource_allowance_default": "prohibited",
+                        "resource_mandatory": [
+                            "name",
+                            "label",
+                            "signonMode",
+                            "credentials_oauthClient_token_endpoint_auth_method",
+                            "settings_oauthClient_redirect_uris",
+                            "settings_oauthClient_wildcard_redirect",
+                            "settings_oauthClient_response_types",
+                            "settings_oauthClient_grant_types",
+                            "settings_oauthClient_application_type",
+                            "settings_oauthClient_idp_initiated_login_mode"
+                        ]
+                    },
+                    "AppSAMLCreate": {
+                        "method": "post",
+                        "call": {
+                            "mode": "normal",
+                            "path": "/api/v1/groups"
+                        },
+                        "semantics": "create",
+                        "resource_allowance_default": "prohibited",
+                        "resource_mandatory": [
+                            "name",
+                            "label",
+                            "signonMode",
+                            "credentials_oauthClient_token_endpoint_auth_method",
+                            "settings_oauthClient_redirect_uris",
+                            "settings_oauthClient_wildcard_redirect",
+                            "settings_oauthClient_response_types",
+                            "settings_oauthClient_grant_types",
+                            "settings_oauthClient_application_type",
+                            "settings_oauthClient_idp_initiated_login_mode"
+                        ]
+                    },
+                    "AppDelete": {
+                        "method": "delete",
+                        "call": {
+                            "mode": "normal",
+                            "path": "/api/v1/aps/{id}"
+                        },
+                        "semantics": "delete",
+                        "resource_allowance_default": "prohibited",
+                        "resource_mandatory": [
+                            "id"
+                        ]
+                    }
+                },
+                "parameters": {},
+                "key": "id",
+                "resources": {
+                    "id": "string*",
+                    "name": "string*",
+                    "label": "string*",
+                    "status": "string*",
+                    "lastUpdated": "string*",
+                    "created": "string*",
+                    "accessibility": {
+                        "selfService": "_:boolean*",
+                        "errorRedirectUrl": "_:boolean*",
+                        "loginRedirectUrl": "_:boolean*"
+                    },
+                    "visibility": {
+                    "autoSubmitToolbar": "_:boolean*",
+                    "hide": {
+                        "iOS": "_:boolean*",
+                        "web": "_:boolean*"
+                    },
+                    "appLinks": {
+                        "testorgone_customsaml20app_1_link": "_:boolean*"
+                    }
+                    },
+                    "features": ["string*"],
+                    "signOnMode": "string*",
+                    "credentials": {
+                        "userNameTemplate": {
+                            "template": "_:string*",
+                            "type": "_:string*"
+                        },
+                        "signing": {
+                            "kid":"_:string*"
+                        }
+                    },
+                    "settings": {
+                        "app": {
+                            "buttonField": "_:string*",
+                            "passwordField": "_:string*",
+                            "usernameField": "_:string*",
+                            "url": "_:string*"
+                        },
+                        "notifications": {
+                            "vpn": {
+                            "network": {
+                                "connection": "_:string*"
+                            },
+                            "message": "_:string*",
+                            "helpUrl": "_:string*"
+                            }
+                        },
+                        "signOn": {
+                            "defaultRelayState": "_:string*",
+                            "ssoAcsUrl": "_:string*",
+                            "idpIssuer": "_:string*",
+                            "audience": "_:string*",
+                            "recipient": "_:string*",
+                            "destination": "_:string*",
+                            "subjectNameIdTemplate": "_:string*",
+                            "subjectNameIdFormat": "_:string*",
+                            "responseSigned": "_:boolean*",
+                            "assertionSigned": "_:boolean*",
+                            "signatureAlgorithm": "_:string*",
+                            "digestAlgorithm": "_:string*",
+                            "honorForceAuthn": "_:boolean*",
+                            "authnContextClassRef": "_:string*",
+                            "slo": {
+                                "enabled": "_:boolean*",
+                                "spIssuer": "_:string*",
+                                "logoutUrl": "_:string*"
+                            },
+                            "participateSlo": {
+                                "enabled": "_:boolean*",
+                                "logoutRequestUrl": "_:string*",
+                                "sessionIndexRequired": "_:boolean*",
+                                "bindingType": "_:string*"
+                            },
+                            "spCertificate": {
+                                "x5c": [
+                                "_:string*"
+                                ]
+                            },
+                            "requestCompressed": "_:boolean*",
+                            "allowMultipleAcsEndpoints": "_:boolean*",
+                            "acsEndpoints": [{
+                                "url": "_:string*",
+                                "index":"_:string*"
+                            }],
+                            "attributeStatements": [{
+                                "type": "string*",
+                                "name": "string*",
+                                "namespace": "string*",
+                                "values": ["string*"]
+                            }],
+                            "inlineHooks": [
+                            {
+                                "id": "string*",
+                                "_links": {
+                                    "self": {
+                                        "href": "_:string*",
+                                        "hints": {
+                                            "allow": ["_:string*"]
+                                        }
+                                    }
+                                }
+                            }
+                            ]
+                        }
+                    },
+                    "_links": {
+                        "logo": [
+                            {
+                            "name": "string*",
+                            "href": "string*",
+                            "type": "string*"
+                            }
+                        ],
+                        "appLinks": [
+                            {
+                            "name": "string*",
+                            "href": "string*",
+                            "type": "string*"
+                            }
+                        ],
+                        "help": {
+                            "href": "_:string*",
+                            "type": "_:string*"
+                        },
+                        "users": {
+                            "href": "_:string*"
+                        },
+                        "deactivate": {
+                            "href": "_:string*"
+                        },
+                        "groups": {
+                            "href": "_:string*"
+                        },
+                        "metadata": {
+                            "href": "_:string*",
+                            "type": "_:string*"
+                        }
+                    }
+                }
+            },
+            "Apps_Groups": {
+                "operations": {
+                    "Apps_GroupsList": {
+                        "method": "get",
+                        "call": {
+                            "mode": "iteration",
+                            "table": "Apps",
+                            "iterator": "id",
+                            "path": "/api/v1/apps/{iterator}/groups",
+                            "base": {
+                                "app_id": "{iterator}"
+                            }
+                        },
+                        "processing_options": {
+                            "output_field": null
+                        },
+                        "maxSessionCount": 5
+                    },
+                    "Apps_GroupAdd": {
+                        "method": "put",
+                        "call": {
+                            "mode": "normal",
+                            "path": "/api/v1/apps/{app_id}/groups/{id}"
+                        },
+                        "query_parameters": {},
+                        "body":{
+                            "_nim_merge_attributes_": false
+                        },
+                        "semantics": "create",
+                        "resource_allowance_default": "mandatory",
+                        "resource_mandatory": [
+                            "id",
+                            "app_id"
+                        ]
+                    },
+                    "Apps_GroupRemove": {
+                        "method": "delete",
+                        "call": {
+                            "mode": "normal",
+                            "path": "/api/v1/groups/{app_id}/groups/{id}"
+                        },
+                        "query_parameters": {},
+                        "body":{
+                            "_nim_merge_attributes_": false
+                        },
+                        "semantics": "delete",
+                        "resource_allowance_default": "mandatory",
+                        "resource_mandatory": [
+                            "id",
+                            "app_id"
+                        ]
+                    }
+                },
+                "parameters": {},
+                "groupmembership": {
+                    "add_operation": "Apps_GroupAdd",
+                    "remove_operation": "Apps_GroupRemove",
+                    "member_table": "Groups",
+                    "group_table": "Apps",
+                    "member_attributes": {
+                        "id": "id"
+                    },
+                    "group_attributes": {
+                        "id": "app_id"
+                    }
+                },
+                "resources": {
+                    "id": "string*",
+                    "app_id": "string*",
+                    "lastUpdated": "string*",
+                    "priority": "number*"
+                }
+            },
+            "Apps_Users": {
+                "operations": {
+                    "Apps_UsersList": {
+                        "method": "get",
+                        "call": {
+                            "mode": "iteration",
+                            "table": "Apps",
+                            "iterator": "id",
+                            "path": "/api/v1/apps/{iterator}/users",
+                            "base": {
+                                "app_id": "{iterator}"
+                            }
+                        },
+                        "processing_options": {
+                            "output_field": null
+                        },
+                        "maxSessionCount": 5
+                    },
+                    "Apps_UserAdd": {
+                        "method": "put",
+                        "call": {
+                            "mode": "normal",
+                            "path": "/api/v1/apps/{app_id}/users/{id}"
+                        },
+                        "query_parameters": {},
+                        "body":{
+                            "_nim_merge_attributes_": false
+                        },
+                        "semantics": "create",
+                        "resource_allowance_default": "prohibited",
+                        "resource_mandatory": [
+                            "id",
+                            "app_id"
+                        ]
+                    },
+                    "Apps_UserRemove": {
+                        "method": "delete",
+                        "call": {
+                            "mode": "normal",
+                            "path": "/api/v1/groups/{app_id}/users/{id}"
+                        },
+                        "query_parameters": {},
+                        "body":{
+                            "_nim_merge_attributes_": false
+                        },
+                        "semantics": "delete",
+                        "resource_allowance_default": "prohibited",
+                        "resource_mandatory": [
+                            "id",
+                            "app_id"
+                        ]
+                    },
+                    "Apps_UserSetCredential": {
+                        "method": "post",
+                        "call": {
+                            "mode": "normal",
+                            "path": "/api/v1/apps/{app_id}/users/{id}"
+                        },
+                        "body":{
+                            "_nim_merge_attributes_": false,
+                            "credentials": {
+                                "userName": "{credentials.userName}",
+                                "password": {
+                                    "value": "{credentials.password.value}"
+                                }
+                            }
+                        },
+                        "resource_allowance_default": "prohibited",
+                        "resource_mandatory": [
+                            "id",
+                            "app_id",
+                            "credentials_userName",
+                            "credentials_password_value"
+                        ]
+                    }
+                },
+                "parameters": {},
+                "groupmembership": {
+                    "add_operation": "Apps_UserAdd",
+                    "remove_operation": "Apps_UserRemove",
+                    "member_table": "Users",
+                    "group_table": "Apps",
+                    "member_attributes": {
+                        "id": "id"
+                    },
+                    "group_attributes": {
+                        "id": "app_id"
+                    }
+                },
+                "resources": {
+                    "id": "string*",
+                    "app_id": "string*",
+                    "externalId": "string*",
+                    "created": "string*",
+                    "lastUpdated": "string*",
+                    "scope": "string*",
+                    "status": "string*",
+                    "statusChanged": "string*",
+                    "passwordChanged": "string*",
+                    "syncState": "string*",
+                    "lastSync": "string*",
+                    "credentials": {
+                      "userName": "_:string*",
+                      "password": {
+                        "value": "_:string*"
+                      }
+                    },
+                    "profile": {
+                      "secondEmail": "_:string*",
+                      "lastName": "_:string*",
+                      "mobilePhone": "_:string*",
+                      "email": "_:string*",
+                      "salesforceGroups": "_:string*",
+                      "role": "_:string*",
+                      "firstName": "_:string*",
+                      "profile": "_:string*"
+                    },
+                    "_links": {
+                      "app": {
+                        "href": "_:string*"
+                      },
+                      "user": {
+                        "href": "_:string*"
+                      }
+                    }
+                }
+            },
             "Users": {
                 "operations": {
                     "UsersList": {
@@ -12,7 +423,9 @@
                         "processing_options": {
                             "output_field": null
                         },
-                        "query_parameters": {"filter": "status eq \"ACTIVE\" or status eq \"DEPROVISIONED\" or status eq \"LOCKED_OUT\" or status eq \"PASSWORD_EXPIRED\" or status eq \"PROVISIONED\" or status eq \"RECOVERY\" or status eq \"STAGED\" or status eq \"SUSPENDED\""}
+                        "query_parameters": {
+                            "filter": "status eq \"ACTIVE\" or status eq \"DEPROVISIONED\" or status eq \"LOCKED_OUT\" or status eq \"PASSWORD_EXPIRED\" or status eq \"PROVISIONED\" or status eq \"RECOVERY\" or status eq \"STAGED\" or status eq \"SUSPENDED\""
+                        }
                     },
                     "UsersResetFactors": {
                         "method": "post",
@@ -41,7 +454,7 @@
                         "call": {
                             "mode": "normal",
                             "path": "/api/v1/users?activate=true",
-                            "post_processing": "child_tables"
+                            "post_processing": "as_input"
                         },
                         "semantics": "create",
                         "resource_allowance_default": "optional",
@@ -65,10 +478,10 @@
                             "profile_login",
                             "profile_lastName",
                             "profile_firstName",
+                            "profile_email",
                             "credentials_password"
                         ],
-                        "warning_only": [
-                        ],
+                        "warning_only": [],
                         "body": {
                             "profile": {
                                 "lastName": "{profile_lastName}",
@@ -106,7 +519,7 @@
                         "call": {
                             "mode": "normal",
                             "path": "/api/v1/users/{id}",
-                            "post_processing": "child_tables"
+                            "post_processing": "as_input"
                         },
                         "semantics": "update",
                         "resource_allowance_default": "optional",
@@ -127,8 +540,7 @@
                         "resource_mandatory": [
                             "id"
                         ],
-                        "warning_only": [
-                        ],
+                        "warning_only": [],
                         "body": {
                             "profile": {
                                 "lastName": "{profile_lastName}",
@@ -171,8 +583,7 @@
                         "resource_mandatory": [
                             "id"
                         ],
-                        "warning_only": [
-                        ]
+                        "warning_only": []
                     },
                     "UsersReactivate": {
                         "method": "post",
@@ -184,8 +595,7 @@
                         "resource_mandatory": [
                             "id"
                         ],
-                        "warning_only": [
-                        ]
+                        "warning_only": []
                     },
                     "UsersDelete": {
                         "method": "delete",
@@ -198,8 +608,7 @@
                         "resource_mandatory": [
                             "id"
                         ],
-                        "warning_only": [
-                        ]
+                        "warning_only": []
                     }
                 },
                 "parameters": {},
@@ -280,13 +689,74 @@
                     }
                 }
             },
+            "Okta_Groups": {
+                "operations": {
+                    "Okta_GroupsList": {
+                        "method": "get",
+                        "call": {
+                            "path": "/api/v1/groups"
+                        },
+                        "processing_options": {
+                            "output_field": null
+                        },
+                        "query_parameters": {
+                            "filter": "type eq \"OKTA_GROUP\""
+                        }
+                    },
+                    "Okta_GroupCreate": {
+                        "method": "post",
+                        "call": {
+                            "mode": "normal",
+                            "path": "/api/v1/groups"
+                        },
+                        "semantics": "create",
+                        "resource_allowance_default": "optional",
+                        "resource_prohibited": [
+                            "id",
+                            "created",
+                            "lastUpdated",
+                            "lastMemberbershipUpdated",
+                            "type"
+                        ],
+                        "resource_mandatory": [
+                            "profile_name",
+                            "profile_description"
+                        ]
+                    },
+                    "Okta_GroupDelete": {
+                        "method": "delete",
+                        "call": {
+                            "mode": "normal",
+                            "path": "/api/v1/groups/{id}"
+                        },
+                        "semantics": "delete",
+                        "resource_allowance_default": "prohibited",
+                        "resource_mandatory": [
+                            "id"
+                        ]
+                    }
+                },
+                "parameters": {},
+                "key": "id",
+                "resources": {
+                    "id": "string*",
+                    "created": "date*",
+                    "lastUpdated": "date*",
+                    "lastMembershipUpdated": "date*",
+                    "type": "string*",
+                    "profile": {
+                        "name": "_:string*",
+                        "description": "_:string*"
+                    }
+                }
+            },
             "Groups_Users": {
                 "operations": {
                     "Groups_UsersList": {
                         "method": "get",
                         "call": {
                             "mode": "iteration",
-                            "table": "Users",
+                            "table": "Groups",
                             "iterator": "id",
                             "path": "/api/v1/groups/{iterator}/users",
                             "base": {
@@ -296,26 +766,98 @@
                         "processing_options": {
                             "output_field": null
                         },
-                        "maxSessionCount": 20
+                        "maxSessionCount": 5
                     }
                 },
                 "parameters": {},
                 "resources": {
-                    "id": "string*"
+                    "id": "string*",
+                    "group_id": "string*"
+                }
+            },
+            "Okta_Groups_Users": {
+                "operations": {
+                    "Okta_Groups_UsersList": {
+                        "method": "get",
+                        "call": {
+                            "mode": "iteration",
+                            "table": "Okta_Groups",
+                            "iterator": "id",
+                            "path": "/api/v1/groups/{iterator}/users",
+                            "base": {
+                                "group_id": "{iterator}"
+                            }
+                        },
+                        "processing_options": {
+                            "output_field": null
+                        },
+                        "maxSessionCount": 5
+                    },
+                    "Okta_Groups_UserAdd": {
+                        "method": "put",
+                        "call": {
+                            "mode": "normal",
+                            "path": "/api/v1/groups/{group_id}/users/{id}"
+                        },
+                        "query_parameters": {},
+                        "body":{
+                            "_nim_merge_attributes_": false
+                        },
+                        "semantics": "create",
+                        "resource_allowance_default": "prohibited",
+                        "resource_mandatory": [
+                            "id",
+                            "group_id"
+                        ]
+                    },
+                    "Okta_Groups_UserRemove": {
+                        "method": "delete",
+                        "call": {
+                            "mode": "normal",
+                            "path": "/api/v1/groups/{group_id}/users/{id}"
+                        },
+                        "query_parameters": {},
+                        "body":{
+                            "_nim_merge_attributes_": false
+                        },
+                        "semantics": "delete",
+                        "resource_allowance_default": "prohibited",
+                        "resource_mandatory": [
+                            "id",
+                            "group_id"
+                        ]
+                    }
+                },
+                "parameters": {},
+                "groupmembership": {
+                    "add_operation": "Okta_Groups_UserAdd",
+                    "remove_operation": "Okta_Groups_UserRemove",
+                    "member_table": "Users",
+                    "group_table": "Okta_Groups",
+                    "member_attributes": {
+                        "id": "id"
+                    },
+                    "group_attributes": {
+                        "id": "group_id"
+                    }
+                },
+                "resources": {
+                    "id": "string*",
+                    "group_id": "string*"
                 }
             }
+            
         }
     },
     "rest": {
         "config": {
             "baseUrl": "https://{tenant_id}",
             "get": {
-                "query_parameters": {
-                },
+                "query_parameters": {},
                 "pagination": {
                     "mode": "link",
-                    "path":[],
-                    "page_size":"{page_size}"
+                    "path": [],
+                    "page_size": "{page_size}"
                 }
             },
             "call_handling": "generic",
@@ -330,7 +872,7 @@
                     "retry": {
                         "type": "simple",
                         "maxCount": 12,
-                        "waitTime": 5
+                        "waitTime": 60
                     }
                 },
                 {
@@ -339,7 +881,7 @@
                     "retry": {
                         "type": "simple",
                         "maxCount": 12,
-                        "waitTime": 5
+                        "waitTime": 60
                     }
                 },
                 {
@@ -351,7 +893,6 @@
                 "Authorization": "SSWS {client_secret}"
             }
         }
-        
     },
     "connection": {
         "items": [
