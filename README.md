@@ -4,17 +4,32 @@
 
 
 ## Data Tables
+- Apps
+- Apps Groups
 - Groups
-- Groups_Users
+- GroupsUsers
+- Okta Groups
+- Okta Groups Users
 - Users
+  
 
 
 ## Actions
+- Apps
+    - Create/Delete
+- Apps Groups
+    - Add/Remove
+- Okta Groups
+    - Create/Delete
+- Groups Users
+- Okta Groups Users
+    - Add/Remove 
 - Users
     - Create/Update/Delete
     - Reset Factors
     - Clear Sessions
     - Deactivate/Reactivate
+      
       
 
 # NIM Docs
