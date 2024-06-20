@@ -398,7 +398,7 @@
                       "lastName": "_:string*",
                       "mobilePhone": "_:string*",
                       "email": "_:string*",
-                      "salesforceGroups": ["_:string*"],
+                      "salesforceGroups": "_:string*",
                       "role": "_:string*",
                       "firstName": "_:string*",
                       "profile": "_:string*"
