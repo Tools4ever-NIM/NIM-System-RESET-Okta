@@ -12,7 +12,9 @@
                         "processing_options": {
                             "output_field": null
                         },
-                        "query_parameters": {}
+                        "query_parameters": {
+                            "limit": "-1"
+                        }
                     },
                     "AppOAuthCreate": {
                         "method": "post",
@@ -221,7 +223,7 @@
                             "mode": "iteration",
                             "table": "Apps",
                             "iterator": "id",
-                            "path": "/api/v1/apps/{iterator}/groups",
+                            "path": "/api/v1/apps/{iterator}/groups?limit=200",
                             "base": {
                                 "app_id": "{iterator}"
                             }
@@ -294,7 +296,7 @@
                             "mode": "iteration",
                             "table": "Apps",
                             "iterator": "id",
-                            "path": "/api/v1/apps/{iterator}/users",
+                            "path": "/api/v1/apps/{iterator}/users?limit=500",
                             "base": {
                                 "app_id": "{iterator}"
                             }
@@ -662,6 +664,86 @@
                     }
                 }
             },
+            "Users_Apps": {
+                "operations": {
+                    "Apps_UsersList": {
+                        "method": "get",
+                        "call": {
+                            "mode": "iteration",
+                            "table": "Users",
+                            "iterator": "id",
+                            "path": "/api/v1/users/{iterator}/appLinks",
+                            "base": {
+                                "user_id": "{iterator}"
+                            }
+                        },
+                        "processing_options": {
+                            "output_field": null
+                        },
+                        "maxSessionCount": 5
+                    },
+                    "Users_AppAdd": {
+                        "method": "put",
+                        "call": {
+                            "mode": "normal",
+                            "path": "/api/v1/apps/{app_id}/users/{user_id}"
+                        },
+                        "query_parameters": {},
+                        "body":{
+                            "_nim_merge_attributes_": false
+                        },
+                        "semantics": "create",
+                        "resource_allowance_default": "prohibited",
+                        "resource_mandatory": [
+                            "id",
+                            "app_id"
+                        ]
+                    },
+                    "Users_AppRemove": {
+                        "method": "delete",
+                        "call": {
+                            "mode": "normal",
+                            "path": "/api/v1/groups/{app_id}/users/{user_id}"
+                        },
+                        "query_parameters": {},
+                        "body":{
+                            "_nim_merge_attributes_": false
+                        },
+                        "semantics": "delete",
+                        "resource_allowance_default": "prohibited",
+                        "resource_mandatory": [
+                            "user_id",
+                            "app_id"
+                        ]
+                    }
+                },
+                "parameters": {},
+                "groupmembership": {
+                    "add_operation": "Users_AppAdd",
+                    "remove_operation": "Users_AppRemove",
+                    "member_table": "Users",
+                    "group_table": "Apps",
+                    "member_attributes": {
+                        "id": "id"
+                    },
+                    "group_attributes": {
+                        "id": "app_id"
+                    }
+                },
+                "resources": {
+                    "user_id": "string*",
+                    "appAssignmentId": "string*",
+                    "appInstanceId": "string*",
+                    "appName": "string*",
+                    "credentialsSetup": "boolean*",
+                    "hidden": "boolean*",
+                    "id": "string*",
+                    "label": "string*",
+                    "linkUrl": "string*",
+                    "logoUrl": "string*",
+                    "sortOrder": "string*"
+                }
+            },
             "Groups": {
                 "operations": {
                     "GroupsList": {
@@ -672,7 +754,9 @@
                         "processing_options": {
                             "output_field": null
                         },
-                        "query_parameters": {}
+                        "query_parameters": {
+                            "limit": "10000"
+                        }
                     }
                 },
                 "parameters": {},
@@ -700,6 +784,7 @@
                             "output_field": null
                         },
                         "query_parameters": {
+                            "limit": "10000",
                             "filter": "type eq \"OKTA_GROUP\""
                         }
                     },
@@ -758,7 +843,7 @@
                             "mode": "iteration",
                             "table": "Groups",
                             "iterator": "id",
-                            "path": "/api/v1/groups/{iterator}/users",
+                            "path": "/api/v1/groups/{iterator}/users?limit=1000",
                             "base": {
                                 "group_id": "{iterator}"
                             }
@@ -783,7 +868,7 @@
                             "mode": "iteration",
                             "table": "Okta_Groups",
                             "iterator": "id",
-                            "path": "/api/v1/groups/{iterator}/users",
+                            "path": "/api/v1/groups/{iterator}/users?limit=1000",
                             "base": {
                                 "group_id": "{iterator}"
                             }
@@ -856,8 +941,7 @@
                 "query_parameters": {},
                 "pagination": {
                     "mode": "link",
-                    "path": [],
-                    "page_size": "{page_size}"
+                    "path": []
                 }
             },
             "call_handling": "generic",
@@ -896,12 +980,6 @@
     },
     "connection": {
         "items": [
-            {
-                "name": "page_size",
-                "type": "textbox",
-                "label": "Page Size",
-                "value": "200"
-            }
         ]
     }
 }
